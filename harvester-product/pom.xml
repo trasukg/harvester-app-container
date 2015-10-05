@@ -23,10 +23,10 @@
     <version>1.0-SNAPSHOT</version>
   </parent>
   <groupId>org.apache.river.container</groupId>
-  <artifactId>product</artifactId>
+  <artifactId>harvester-product</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>product</name>
+  <name>harvester-product</name>
     <dependencies>
         <dependency>
             <groupId>org.apache.river.container</groupId>

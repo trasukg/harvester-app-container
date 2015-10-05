@@ -24,9 +24,9 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <groupId>org.apache.river.container</groupId>
-    <artifactId>admin-app</artifactId>
+    <artifactId>harvester-admin-app</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>admin-app</name>
+    <name>harvester-admin-app</name>
     <url>http://maven.apache.org</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

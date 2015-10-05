@@ -11,3 +11,7 @@
 /admin-svc/admin-svc-module/target/
 /admin-svc/admin-svc-impl/target/
 /admin-svc/admin-svc-dl/target/
+/admin-svc/harvester-admin-svc-impl/target/
+/harvester-admin-svc/admin-svc-api/target/
+/harvester-admin-svc/admin-svc-dl/target/
+/harvester-admin-svc/harvester-admin-svc-impl/target/

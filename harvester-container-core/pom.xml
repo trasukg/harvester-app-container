@@ -26,9 +26,9 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <groupId>org.apache.river.container</groupId>
-    <artifactId>river-container-core</artifactId>
+    <artifactId>harvester-container-core</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>river-container-core</name>
+    <name>harvester-container-core</name>
     <url>http://maven.apache.org</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

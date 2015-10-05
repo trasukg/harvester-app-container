@@ -26,9 +26,9 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <groupId>org.apache.river.container</groupId>
-    <artifactId>river-hsm</artifactId>
+    <artifactId>harvester-hsm</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>river-hsm</name>
+    <name>harvester-hsm</name>
     <url>http://maven.apache.org</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

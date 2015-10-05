@@ -23,10 +23,10 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <groupId>org.apache.river.container</groupId>
-    <artifactId>admin-module</artifactId>
+    <artifactId>harvester-admin-module</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>admin-module</name>
+    <name>harvester-admin-module</name>
     <dependencies>
         <dependency>
             <groupId>org.apache.river.container</groupId>
