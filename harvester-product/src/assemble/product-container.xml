@@ -109,7 +109,7 @@
             <outputDirectory>/profile/admin-client/deploy</outputDirectory>
             <scope>runtime</scope>
             <includes>
-                <include>*:admin-module</include>
+                <include>*:harvester-admin-module</include>
             </includes>
         </dependencySet>
         

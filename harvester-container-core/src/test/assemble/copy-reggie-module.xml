@@ -31,7 +31,7 @@
             <scope>test</scope>
             <outputDirectory>/</outputDirectory>
             <includes>
-                <include>org.apache.river.container:reggie-module</include>
+                <include>com.stratuscom.harvester:reggie-module</include>
             </includes>
             <useProjectArtifact>false</useProjectArtifact>
             <outputFileNameMapping>${artifact.artifactId}.${artifact.extension}</outputFileNameMapping>

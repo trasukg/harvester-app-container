@@ -43,7 +43,7 @@ options {
 
 PARSER_BEGIN(ClasspathExpressionParser)
 
-package org.apache.river.container.classloading;
+package com.stratuscom.harvester.classloading;
 
 import java.io.Reader;
 import java.util.ArrayList;

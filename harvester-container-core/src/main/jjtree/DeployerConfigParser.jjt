@@ -43,7 +43,7 @@ options {
 
 PARSER_BEGIN(DeployerConfigParser)
 
-package org.apache.river.container.deployer;
+package com.stratuscom.harvester.deployer;
 
 import java.io.InputStream;
 import java.io.Reader;

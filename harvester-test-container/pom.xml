@@ -21,11 +21,10 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.apache.river.container</groupId>
-        <artifactId>river-container</artifactId>
+        <groupId>com.stratuscom.harvester</groupId>
+        <artifactId>harvester</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <groupId>org.apache.river.container</groupId>
     <artifactId>harvester-test-container</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>harvester-test-container</name>
@@ -36,8 +35,8 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>org.apache.river.container</groupId>
-            <artifactId>river-container-core</artifactId>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>harvester-container-core</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
@@ -48,19 +47,19 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.river.container</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>reggie-module</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.river.container</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>transient-mahalo-module</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.river.container</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>browser-module</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>

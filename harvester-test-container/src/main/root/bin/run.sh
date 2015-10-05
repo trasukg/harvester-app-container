@@ -16,4 +16,4 @@
 # limitations under the License.
 #
 
-java -classpath lib/river-container-core-*.jar  -Djava.util.logging.config.file=bin/logging.properties -Dcom.sun.management.jmxremote org.apache.river.container.Bootstrap $*
+java -classpath lib/river-container-core-*.jar  -Djava.util.logging.config.file=bin/logging.properties -Dcom.sun.management.jmxremote com.stratuscom.harvester.Bootstrap $*
