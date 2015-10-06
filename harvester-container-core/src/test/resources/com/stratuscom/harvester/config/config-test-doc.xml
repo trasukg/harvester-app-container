@@ -20,8 +20,8 @@
 -->
 
 <cfg:container-config  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-   xmlns:cfg='http://harvester.stratuscom.com/xml/ns/container/config/1.0'
-   xsi:schemaLocation='http://river.apache.org/xml/ns/container/config/1.0 file:/home/trasukg/development/surrogate/schemas/config.xsd'>
+   xmlns:cfg='http://harvester.stratuscom.com/xml/ns/config/1.0'
+   xsi:schemaLocation='http://harvester.stratuscom.com/xml/ns/config/1.0 file:/home/trasukg/development/surrogate/schemas/config.xsd'>
     <cfg:classpath id="a">lib/abc.jar</cfg:classpath>
     <cfg:classpath id="b" parent="a">lib/def.jar</cfg:classpath>
 

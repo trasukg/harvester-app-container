@@ -20,8 +20,8 @@
 -->
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
-    targetNamespace="http://harvester.stratuscom.com/xml/ns/container/config/1.0"
-    xmlns:tns="http://harvester.stratuscom.com/xml/ns/container/config/1.0"
+    targetNamespace="http://harvester.stratuscom.com/xml/ns/config/1.0"
+    xmlns:tns="http://harvester.stratuscom.com/xml/ns/config/1.0"
     jaxb:version="2.0" elementFormDefault="qualified">
     <xsd:element name="container-config">
         <xsd:complexType>

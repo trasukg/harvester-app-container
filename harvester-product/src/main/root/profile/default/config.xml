@@ -28,8 +28,8 @@
  -->
 
 <cfg:container-config  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-   xmlns:cfg='http://river.apache.org/xml/ns/container/config/1.0'
-   xsi:schemaLocation='http://river.apache.org/xml/ns/container/config/1.0 file:/home/trasukg/development/surrogate/src/schemas/config.xsd'>
+   xmlns:cfg='http://harvester.stratuscom.com/xml/ns/config/1.0'
+   xsi:schemaLocation='http://harvester.stratuscom.com/xml/ns/config/1.0 file:/home/trasukg/development/surrogate/src/schemas/config.xsd'>
     <cfg:property name="deploymentDirectory" value="deploy"/>
 
     <!-- Change this value to change the discovery group for the container.

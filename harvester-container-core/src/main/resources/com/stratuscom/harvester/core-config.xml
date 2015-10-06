@@ -36,8 +36,8 @@
  -->
 
 <cfg:container-config  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-   xmlns:cfg='http://harvester.stratuscom.com/xml/ns/container/config/1.0'
-   xsi:schemaLocation='http://harvester.stratuscom.com/xml/ns/container/config/1.0 file:/home/trasukg/development/surrogate/src/schemas/config.xsd'>
+   xmlns:cfg='http://harvester.stratuscom.com/xml/ns/config/1.0'
+   xsi:schemaLocation='http://harvester.stratuscom.com/xml/ns/config/1.0 file:/home/trasukg/development/surrogate/src/schemas/config.xsd'>
     <!-- Dynamic policy provider needs to be available to both the container and
     any "application" classloaders, so it needs to be in a classloader which is
     a parent to both the container classloader and the application loaders.
@@ -47,14 +47,14 @@
     -->
     <cfg:classpath id="systemClassLoader">lib/jsk-policy-${jsk-version}.jar</cfg:classpath>
     <cfg:classpath id="containerClassLoader" parent="systemClassLoader">
-        lib/river-container-core-${project.version}.jar
+        lib/harvester-container-core-${project.version}.jar
         lib/commons-logging-1.1.1.jar
         lib/commons-vfs2-2.0.jar
         lib/jsk-platform-${jsk-version}.jar
         lib/jsk-lib-${jsk-version}.jar
         lib/jsk-resources-${jsk-version}.jar
         lib/regexp-1.3.jar
-        lib/river-hsm-${project.version}.jar
+        lib/harvester-hsm-${project.version}.jar
         lib/admin-svc-api-${project.version}.jar
     </cfg:classpath>
 
