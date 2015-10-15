@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.river.container.examples.browser;
+package com.stratuscom.harvester.browser;
 
 import net.jini.core.entry.Entry;
 import java.lang.reflect.Field;

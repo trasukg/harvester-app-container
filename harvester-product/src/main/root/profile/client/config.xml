@@ -32,7 +32,7 @@
    xsi:schemaLocation='http://river.apache.org/xml/ns/container/1.0 file:/home/trasukg/development/surrogate/src/schemas/config.xsd'>
     <cfg:property name="deploymentDirectory" value="deploy"/>
 
-    <cfg:property name="defaultDiscoveryGroup" value="RiverContainerDefault"/>
+    <cfg:property name="defaultDiscoveryGroup" value="HarvesterContainerDefault"/>
     <cfg:component class="com.stratuscom.harvester.work.ContextualWorkManager"/>
     <cfg:component class="com.stratuscom.harvester.work.BasicWorkManager"/>
     <cfg:component class="com.stratuscom.harvester.codebase.ClassServer"/>

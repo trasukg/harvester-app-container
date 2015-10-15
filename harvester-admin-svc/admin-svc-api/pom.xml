@@ -23,11 +23,10 @@
     <parent>
         <groupId>com.stratuscom.harvester</groupId>
         <artifactId>harvester-admin-svc</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>2.0.0-SNAPSHOT</version>
     </parent>
     <groupId>com.stratuscom.harvester</groupId>
     <artifactId>admin-svc-api</artifactId>
-    <version>1.0-SNAPSHOT</version>
     <name>admin-svc-api</name>
     <url>http://maven.apache.org</url>
     <properties>

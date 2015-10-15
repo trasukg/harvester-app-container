@@ -32,7 +32,7 @@
    xsi:schemaLocation='http://river.apache.org/xml/ns/container/config/1.0 file:/home/trasukg/development/surrogate/src/schemas/config.xsd'>
     <cfg:property name="deploymentDirectory" value="deploy"/>
 
-    <cfg:property name="defaultDiscoveryGroup" value="RiverContainerDefault"/>
+    <cfg:property name="defaultDiscoveryGroup" value="HarvesterContainerDefault"/>
     <cfg:component class="com.stratuscom.harvester.work.ContextualWorkManager"/>
     <cfg:component class="com.stratuscom.harvester.work.BasicWorkManager"/>
     <cfg:component class="com.stratuscom.harvester.codebase.ClassServer"/>
@@ -48,13 +48,6 @@
         <cfg:property name="deployDirectory" value="deploy"/>
         <cfg:property name="autoDeploy" value="true"/>
     </cfg:component>
-    
-    <!-- Deployer for 'system apps' like the remote deployment service 
-    <cfg:component class="com.stratuscom.harvester.deployer.StarterServiceDeployer">
-        <cfg:property name="config" value="privileged-services.cfg"/>
-        <cfg:property name="deployDirectory" value="deploy-privileged"/>
-    </cfg:component>
-    -->
     
     <cfg:component class="com.stratuscom.harvester.ShowContextToConsole"/>
 </cfg:container-config>

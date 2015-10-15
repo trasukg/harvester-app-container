@@ -20,10 +20,10 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.stratuscom.harvester</groupId>
     <artifactId>harvester</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>2.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>harvester</name>
-    <url>river.apache.org/river-container</url>
+    <url>https://github.com/trasukg/harvester-app-container</url>
     
     <modules>
         <module>harvester-container-core</module>

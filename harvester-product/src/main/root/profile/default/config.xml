@@ -36,7 +36,7 @@
     In the default 'service-starter.cfg', this  value is made available inside 
     service starter configuration files as '$discoveryGroup'.
     -->
-    <cfg:property name="defaultDiscoveryGroup" value="RiverContainerDefault"/>
+    <cfg:property name="defaultDiscoveryGroup" value="HarvesterContainerDefault"/>
     
     <cfg:component class="com.stratuscom.harvester.work.ContextualWorkManager"/>
     <cfg:component class="com.stratuscom.harvester.work.BasicWorkManager"/>
@@ -64,7 +64,7 @@
         <cfg:property name="config" value="privileged-service-starter.cfg"/>
     </cfg:component>
     
-    <!-- Deployer for applications that are in the 'deploy' directory
+    <!-- Deployer for applications that are in the 'deploy-privileged' directory
     at startup. -->
     <cfg:component class="com.stratuscom.harvester.deployer.FolderBasedAppRunner"
         name="deploy-privileged">
@@ -72,13 +72,6 @@
         <cfg:property name="autoDeploy" value="true"/>
         <cfg:property name="deployerName" value="privileged-deployer"/>
     </cfg:component>
-    
-    <!-- Deployer for 'system apps' like the remote deployment service 
-    <cfg:component class="com.stratuscom.harvester.deployer.StarterServiceDeployer">
-        <cfg:property name="config" value="privileged-services.cfg"/>
-        <cfg:property name="deployDirectory" value="deploy-privileged"/>
-    </cfg:component>
-    -->
-    
+        
     <cfg:component class="com.stratuscom.harvester.ShowContextToConsole"/>
 </cfg:container-config>

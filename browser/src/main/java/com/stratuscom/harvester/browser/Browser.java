@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.river.container.examples.browser;
+package com.stratuscom.harvester.browser;
 
 import com.sun.jini.admin.DestroyAdmin;
 import com.sun.jini.config.Config;
@@ -137,7 +137,7 @@ import net.jini.space.JavaSpace;
  */
 public class Browser extends JFrame {
 
-    static final String BROWSER = "org.apache.river.container.examples.browser";
+    static final String BROWSER = "com.stratuscom.harvester.browser";
     static final Logger logger = Logger.getLogger(BROWSER);
     private transient SecurityContext ctx;
     private transient ClassLoader ccl;
