@@ -45,5 +45,6 @@ public interface FileUtility {
 
     public FileObject getLibDirectory() throws IOException;
 
+    public FileObject resolveFile(String path) throws IOException;
     
 }

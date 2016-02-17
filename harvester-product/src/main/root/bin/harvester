@@ -15,5 +15,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+# resolve links - $0 may be a softlink
+PRG="$0"
 
-java -classpath lib/harvester-container-core-*.jar  -Djava.util.logging.config.file=bin/logging.properties -Dcom.sun.management.jmxremote com.stratuscom.harvester.Bootstrap $*
+while [ -h "$PRG" ]; do
+  ls=`ls -ld "$PRG"`
+  link=`expr "$ls" : '.*-> \(.*\)$'`
+  if expr "$link" : '/.*' > /dev/null; then
+    PRG="$link"
+  else
+    PRG=`dirname "$PRG"`/"$link"
+  fi
+done
+
+# Get standard environment variables
+PRGDIR=`dirname "$PRG"`
+
+# Calculate the base dire
+BASE_DIR=`cd "$PRGDIR/.." >/dev/null; pwd`
+
+java -Djava.util.logging.config.file=$BASE_DIR/bin/logging.properties -Dcom.sun.management.jmxremote -Dharvester.home=$BASE_DIR -jar $BASE_DIR/lib/harvester-container-core-*.jar $*

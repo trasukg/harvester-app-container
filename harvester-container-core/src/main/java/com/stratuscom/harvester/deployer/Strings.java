@@ -24,6 +24,7 @@ package com.stratuscom.harvester.deployer;
  */
 public class Strings {
     public static final String
+            COMMA=",",
             EMPTY="",
             FAILED="Failed",
             IDLE="Idle",

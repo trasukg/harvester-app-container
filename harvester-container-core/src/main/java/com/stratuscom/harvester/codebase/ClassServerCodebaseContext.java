@@ -20,6 +20,7 @@ package com.stratuscom.harvester.codebase;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -75,6 +76,13 @@ public class ClassServerCodebaseContext implements CodebaseContext {
                             + appId + Strings.SLASH + path));
                 }
             }
+            
+            // Just to see if it fixes our download problem, reverse the list.
+            // Yep, that fixes it, by totally shutting off the preferred codebase
+            // mechanism.
+            // TODO:  We really ought to be exporting a wrapper jar with a combined 
+            // preferred list.
+            Collections.reverse(codebaseAnnotation);
             return codebaseAnnotation.toArray(new URL[0]);
         } catch (Exception ex) {
             throw new RuntimeException(ex);

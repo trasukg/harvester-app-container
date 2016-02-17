@@ -86,10 +86,18 @@ public class Bootstrap {
     }
 
     static URL[] findClasspathURLS(String classpathStr) throws MalformedURLException {
+        /* If harvester.home is set, then the classpath urls should be taken
+        as relative to that path.
+        */
+        String homePath=System.getProperty(Strings.HARVESTER_DOT_HOME);
+        System.out.println("harvester.home=" + homePath);
+        log.log(Level.FINE,MessageNames.HOMEPATH_IS,homePath);
+        File homePathFile=(homePath==null)?new File(Strings.DOT):new File(homePath);
+        
         StringTokenizer tok = new StringTokenizer(classpathStr, Strings.WHITESPACE_SEPARATORS);
         List<URL> pathElements = new ArrayList<URL>();
         while (tok.hasMoreTokens()) {
-            File f = new File(tok.nextToken());
+            File f = new File(homePathFile,tok.nextToken());
             pathElements.add(f.toURI().toURL());
         }
         URL[] urls = (URL[]) pathElements.toArray(new URL[0]);

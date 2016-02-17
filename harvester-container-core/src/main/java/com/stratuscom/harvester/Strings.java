@@ -49,6 +49,7 @@ public class Strings {
             EXECUTOR_NAME="scheduledExecutorService",
             GET_ADMIN="getAdmin",
             FILE_UTILITY="fileUtility",
+            HARVESTER_DOT_HOME="harvester.home",
             INIT_COMPLETE="initComplete",
             JAR="jar",
             LIB="lib",

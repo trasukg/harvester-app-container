@@ -147,7 +147,7 @@ public class StarterServiceDeployer  {
         return args;
     }
 
-    public VirtualFileSystemClassLoader createServiceClassloader(FileObject serviceRoot, CodeSource codeSource) throws IOException, FileSystemException {
+    public VirtualFileSystemClassLoader createServiceClassloader(String appName, FileObject serviceRoot, CodeSource codeSource) throws IOException, FileSystemException {
 
         String parentLoaderName = configNode.search(
                 new Class[]{ASTconfig.class, ASTclassloader.class, ASTparent.class}).get(0).jjtGetChild(0).toString();
@@ -159,6 +159,7 @@ public class StarterServiceDeployer  {
         ClassLoader parentLoader = (ClassLoader) context.get(parentLoaderName);
         VirtualFileSystemClassLoader cl
                 = createChildOfGivenClassloader(parentLoader, codeSource, isAppPriority);
+        cl.setDebugName("App classloader for " + appName);
         /*
          Include platform jars from the container's lib directory.
          */
@@ -404,7 +405,8 @@ public class StarterServiceDeployer  {
                         new Certificate[0]);
         log.log(Level.INFO, MessageNames.CODESOURCE_IS,
                 new Object[]{env.getServiceName(), serviceCodeSource});
-        VirtualFileSystemClassLoader cl = createServiceClassloader(env.getServiceRoot(), serviceCodeSource);
+        VirtualFileSystemClassLoader cl = createServiceClassloader(env.getServiceName(), 
+                env.getServiceRoot(), serviceCodeSource);
         env.setClassLoader(cl);
 
         /*
@@ -413,8 +415,8 @@ public class StarterServiceDeployer  {
         CodebaseContext codebaseContext
                 = codebaseHandler.createContext(env.getServiceName());
         env.setCodebaseContext(codebaseContext);
-        addPlatformCodebaseJars(codebaseContext);
         exportServiceCodebaseJars(env.getServiceRoot(), codebaseContext);
+        addPlatformCodebaseJars(codebaseContext);
 
         /*
          Setup the classloader's codebase annotation.

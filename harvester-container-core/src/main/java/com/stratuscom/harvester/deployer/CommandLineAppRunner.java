@@ -20,16 +20,10 @@ package com.stratuscom.harvester.deployer;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.management.InstanceAlreadyExistsException;
-import javax.management.MBeanRegistrationException;
-import javax.management.MalformedObjectNameException;
-import javax.management.NotCompliantMBeanException;
-import javax.management.ObjectName;
 import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.FileType;
 import com.stratuscom.harvester.ConfigurationException;
@@ -42,12 +36,14 @@ import com.stratuscom.harvester.MBeanRegistrar;
 import com.stratuscom.harvester.MessageNames;
 import com.stratuscom.harvester.Name;
 import com.stratuscom.harvester.Utils;
-import com.stratuscom.harvester.deployer.ParseException;
+import java.io.File;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.vfs2.FileSystemException;
 
 /**
  *
  * A runner task that looks at the command line to determine the name of an
- * application to run from a deployment folder.  Generally used to run "client"
+ * application to run from a deployment folder. Generally used to run "client"
  * apps where the name of the app is supplied on the command line, for instance
  * the browser app or the admin client app.
  */
@@ -120,7 +116,16 @@ public class CommandLineAppRunner {
         }
     }
 
-    private void tryInitialize() throws IOException, ParseException {
+    /**
+     * If clientAppName has been set, then we're running a predetermined app as
+     * a result of the entry in Config.xml. In that case, we're not going to
+     * bother with any '-with' options.
+     *
+     * @throws IOException
+     * @throws ParseException
+     * @throws org.apache.commons.cli.ParseException
+     */
+    private void tryInitialize() throws IOException, ParseException, org.apache.commons.cli.ParseException {
         log.log(Level.FINE, MessageNames.STARTER_SERVICE_DEPLOYER_STARTING, myName);
 
         /*
@@ -143,30 +148,39 @@ public class CommandLineAppRunner {
             System.out.println(messages.getString(MessageNames.CLIENT_APP_USAGE));
             System.exit(1);
         }
-        String[] clientAppArgs;
+        String[] clientAppArgs = new String[0];
+        String additionalApps = Strings.EMPTY;
         if (clientAppName == null) {
-            clientAppName = commandLineArguments[1];
-            clientAppArgs = new String[commandLineArguments.length - 2];
-            System.arraycopy(commandLineArguments, 2, clientAppArgs, 0,
-                    clientAppArgs.length);
+            String[] argsWithoutProfile = new String[commandLineArguments.length - 1];
+            System.arraycopy(commandLineArguments, 1, argsWithoutProfile, 0,
+                    argsWithoutProfile.length);
+            CommandLine cl = CommandLineParsers.parseCommandLineAppRunnerLine(argsWithoutProfile);
+            // At this point, any remaining args after -with are in getArgs()
+            // The first of those is the app name.
+            clientAppName = cl.getArgs()[0];
+            clientAppArgs = new String[cl.getArgs().length - 1];
+            System.arraycopy(cl.getArgs(), 1, clientAppArgs, 0, clientAppArgs.length);
+            if (cl.hasOption(CommandLineParsers.WITH)) {
+                additionalApps = cl.getOptionValue(CommandLineParsers.WITH);
+            }
         } else {
             clientAppArgs = new String[commandLineArguments.length - 1];
             System.arraycopy(commandLineArguments, 1, clientAppArgs, 0,
                     clientAppArgs.length);
         }
-        // Locate the service archive that has the client's name.
-        // First get all the jar files.
-        List<FileObject> serviceArchives
-                = Utils.findChildrenWithSuffix(deploymentDirectoryFile,
-                        com.stratuscom.harvester.Strings.JAR);
-        //Then find the one that starts with the client name
-        FileObject serviceArchive = null;
-        for (FileObject fo : serviceArchives) {
-            if (fo.getName().getBaseName().startsWith(clientAppName + com.stratuscom.harvester.Strings.DASH)) {
-                serviceArchive = fo;
-                break;
-            }
+        if (!Strings.EMPTY.equals(additionalApps)) {
+            startAdditionalApps(additionalApps);
+        }
 
+        /*
+         See if the clientAppName happens to be a 'jar' name and refers to a 
+         jar file.  If so, that's the service archive.
+         */
+        FileObject serviceArchive = null;
+        if (isAppArchive(clientAppName)) {
+            serviceArchive = fileUtility.resolveFile(clientAppName);
+        } else {
+            serviceArchive = findServiceArchiveForName(clientAppName);
         }
 
         if (serviceArchive == null) {
@@ -176,6 +190,46 @@ public class CommandLineAppRunner {
         // Deploy the service
         deployServiceArchive(serviceArchive, clientAppArgs);
         // Run the main method with the remaining command line parameters.
+    }
+
+    private FileObject findServiceArchiveForName(String appName) throws FileSystemException {
+        // Locate the service archive that has the client's name.
+        // First get all the jar files.
+        List<FileObject> serviceArchives
+                = Utils.findChildrenWithSuffix(deploymentDirectoryFile,
+                        com.stratuscom.harvester.Strings.JAR);
+        //Then find the one that starts with the client name
+        for (FileObject fo : serviceArchives) {
+            if (fo.getName().getBaseName().startsWith(appName + com.stratuscom.harvester.Strings.DASH)) {
+                return fo;
+            }
+        }
+        return null;
+    }
+
+    boolean isAppArchive(String appName) {
+        return appName.endsWith(com.stratuscom.harvester.Strings.JAR)
+                && (new File(appName)).isFile()
+                && (new File(appName)).canRead();
+    }
+
+    /**
+     * Start the apps indicated in the command line's '-with' argument.
+     *
+     * @param appList
+     */
+    private void startAdditionalApps(String appList) throws FileSystemException {
+        //Split on comma
+        String[] additionalApps = appList.split(Strings.COMMA);
+        for (String app : additionalApps) {
+            log.log(Level.INFO, MessageNames.STARTING_WITH_SERVICE, app);
+            FileObject serviceArchive = findServiceArchiveForName(app);
+            if (serviceArchive==null) {
+                System.err.println(MessageFormat.format(messages.getString(MessageNames.NO_SUCH_CLIENT_APP), clientAppName));
+                System.exit(1);
+            }
+            deployServiceArchive(serviceArchive, new String[0]);
+        }
     }
 
     private void deployServiceArchive(FileObject archiveFile, String[] commandLineArgs) {

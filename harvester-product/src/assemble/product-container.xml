@@ -68,6 +68,14 @@
             <excludes>
                 <exclude>*:maven-*</exclude>
                 <exclude>*:plexus-*</exclude>
+                <!-- These are runtime dependencies, but don't need to go into the
+                '/lib' folder.
+                -->
+                <exclude>*:*-module-*</exclude>
+                <exclude>*:browser-*</exclude>
+                <exclude>*:mahalo-*</exclude>
+                <exclude>*:reggie-*</exclude>
+                <exclude>*:outrigger-*</exclude>
             </excludes>
         </dependencySet>
         
@@ -80,7 +88,7 @@
             <scope>runtime</scope>
             <includes>
                 <include>*:reggie-module</include>
-               <include>*:transient-mahalo-module</include>                         
+                <include>*:transient-mahalo-module</include>                         
             </includes>
         </dependencySet>
         <dependencySet>
@@ -91,14 +99,19 @@
                 <include>*:admin-svc-module</include>
             </includes>
         </dependencySet>
-        <!-- Client Profile
+        <!-- 'Run' Profile
+        Includes 'reggie', 'outrigger', and 'mahalo' so they can be run with
+        '-with' option.
         -->
         <dependencySet>
             <useProjectArtifact>false</useProjectArtifact>
-            <outputDirectory>/profile/client/deploy</outputDirectory>
+            <outputDirectory>/profile/run/deploy</outputDirectory>
             <scope>runtime</scope>
             <includes>
+                <include>*:reggie-module</include>
                 <include>*:browser-module</include>
+                <include>*:transient-outrigger-module</include>
+                <include>*:transient-mahalo-module</include>
             </includes>
         </dependencySet>
         

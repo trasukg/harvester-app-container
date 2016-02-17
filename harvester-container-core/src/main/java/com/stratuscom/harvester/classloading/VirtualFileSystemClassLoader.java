@@ -36,6 +36,9 @@ import org.apache.commons.vfs2.FileSystemException;
 import org.apache.commons.vfs2.FileUtil;
 import com.stratuscom.harvester.LocalizedRuntimeException;
 import com.stratuscom.harvester.MessageNames;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 /**
  *
@@ -47,7 +50,18 @@ public class VirtualFileSystemClassLoader extends URLClassLoader {
     private List<ClasspathEntry> classpathEntries = new ArrayList<ClasspathEntry>();
     private CodeSource codeSource = null;
     private boolean isAppPriority = false;
+    private static final Logger log = Logger.getLogger(VirtualFileSystemClassLoader.class.getName());
 
+    private String debugName="";
+
+    public String getDebugName() {
+        return debugName;
+    }
+
+    public void setDebugName(String debugName) {
+        this.debugName = debugName;
+    }
+    
     public VirtualFileSystemClassLoader(FileObject fileSystemRoot, ClassLoader parent, CodeSource codeSource) {
         this(fileSystemRoot, parent, codeSource, false);
     }
@@ -140,6 +154,9 @@ public class VirtualFileSystemClassLoader extends URLClassLoader {
     @Override
     public Enumeration<URL> findResources(final String name) throws IOException {
 
+        if (log.isLoggable(Level.FINE)) {
+            log.fine("findResourceFileObjects(" + name + ")");
+        }
         Enumeration result = (Enumeration) Security.doPrivileged(new PrivilegedAction<Enumeration>() {
 
             public Enumeration run() {
@@ -149,6 +166,35 @@ public class VirtualFileSystemClassLoader extends URLClassLoader {
                     List<FileObject> foList = findResourceFileObjects(name);
                     for (FileObject fo : foList) {
                         urlList.add(fo.getURL());
+                        if (log.isLoggable(Level.FINE)) {
+                            log.fine("..found file object with URL:" + fo.getURL());
+                            log.fine("..trying to open it");
+                        }
+                        /* For unknown reasons, actually getting the resources
+                        will fail iff the target folder is not under the current working
+                        directory, unless we try to open it while we're here.
+                        */
+                        InputStream in = null;
+                        //BufferedReader r = null;
+                        try {
+                            in = fo.getURL().openStream();
+                            //r = new BufferedReader(new InputStreamReader(in, "utf-8"));
+
+                        } catch (Exception x) {
+                            log.log(Level.FINE, "..Got an exception:" + x);
+                        } finally {
+                            try {
+//                                if (r != null) {
+//                                    r.close();
+//                                }
+                                if (in != null) {
+                                    in.close();
+                                }
+                            } catch (IOException y) {
+                                log.log(Level.FINE, "..Additionally, got an exception on close:" + y);
+                            }
+                        }
+
                     }
                 } catch (FileSystemException ex) {
                     Logger.getLogger(VirtualFileSystemClassLoader.class.getName()).log(Level.SEVERE, null, ex);
@@ -211,12 +257,20 @@ public class VirtualFileSystemClassLoader extends URLClassLoader {
                     String resourceName = classToResourceName(name);
                     FileObject resourceFileObject = findResourceFileObject(resourceName);
                     if (resourceFileObject == null) {
+                        if (log.isLoggable(Level.FINE)) {
+                            log.fine(getDebugName() + " was asked for " + resourceName 
+                                + " but couldn't find it.");
+                        }
                         throw new ClassNotFoundException(name + "(" + resourceName + ")");
                     }
                     try {
                         byte[] bytes = FileUtil.getContent(resourceFileObject);
                         return defineClass(name, bytes, 0, bytes.length);
                     } catch (IOException ioe) {
+                        if (log.isLoggable(Level.FINE)) {
+                            log.fine(getDebugName() + " was asked for " + resourceName 
+                                + " but got IOException while loading it.");
+                        }
                         throw new ClassNotFoundException(name, ioe);
                     }
 
@@ -338,9 +392,11 @@ public class VirtualFileSystemClassLoader extends URLClassLoader {
     protected synchronized Class loadClass(String name, boolean resolve)
             throws ClassNotFoundException {
         // First, check if the class has already been loaded
-	Class c = findLoadedClass(name);
-        if (c!=null) return c;
-        
+        Class c = findLoadedClass(name);
+        if (c != null) {
+            return c;
+        }
+
         if (isAppPriority) {
             try {
                 c = findClass(name);

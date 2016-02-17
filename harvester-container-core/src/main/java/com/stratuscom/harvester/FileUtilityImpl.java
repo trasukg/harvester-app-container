@@ -36,6 +36,8 @@ public class FileUtilityImpl implements FileUtility {
 
     private FileSystemManager fsm=null;
 
+    private File harvesterHome=null;
+    
     public FileObject getWorkingDirectory(String name) throws IOException {
 
         FileObject workDir=getProfileDirectory().resolveFile(Strings.WORK).resolveFile(name);
@@ -46,18 +48,27 @@ public class FileUtilityImpl implements FileUtility {
     }
 
     public FileObject getProfileDirectory() throws IOException {
-        FileObject profileDir = fsm.resolveFile(new File(Strings.PROFILE), profile);
+        FileObject profileDir = fsm.resolveFile(new File(harvesterHome, Strings.PROFILE), profile);
         return profileDir;
     }
 
     @Init
     public void init() throws FileSystemException {
         fsm=VFS.getManager();
+        String harvesterHomePath=System.getProperty(Strings.HARVESTER_DOT_HOME);
+        harvesterHome=(harvesterHomePath==null)?
+                new File(Strings.DOT)
+                : new File(harvesterHomePath);
     }
 
     @Override
     public FileObject getLibDirectory() throws IOException {
-        FileObject libDir = fsm.resolveFile(new File(Strings.LIB), ".");
+        FileObject libDir = fsm.resolveFile(new File(harvesterHome, Strings.LIB), ".");
         return libDir;
+    }
+    
+    @Override
+    public FileObject resolveFile(String path) throws IOException {
+        return fsm.resolveFile(new File(path).getAbsolutePath());
     }
 }

@@ -136,5 +136,9 @@ public class PropertiesFileReaderTest {
         public FileObject getLibDirectory() throws IOException {
             throw new UnsupportedOperationException("Not supported yet.");
         }
+
+        public FileObject resolveFile(String path) throws IOException {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
     }
 }
