@@ -98,8 +98,8 @@ public class StateMachineException extends RuntimeException {
      resource bundles or locales in the thrower and receiver (e.g. in the case
      of a serialized exception passed between two JVMs.
 
-     @param locale The localized message
-     @return
+     @param locale The locale to use.
+     @return the localized message.
      */
     public String getMessage(Locale locale) {
         ResourceBundle bundle=ResourceBundle.getBundle(messageBundleName, locale);

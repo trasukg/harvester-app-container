@@ -34,7 +34,7 @@ import java.lang.annotation.Target;
 public @interface Initial {
     /**
      The initial state value to be assigned to the state upon machine setup.
-     @return
+     @return The initial state value for machine setup.
      */
     Class value();
 }

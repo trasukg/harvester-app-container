@@ -97,7 +97,7 @@ class StateMachineCompiler {
      * Look for fields that are annotated with
      *
      * @State and fill in the required substate info.
-     * @param metaState
+     * @param metaState The metastate being processed.
      */
     private void processSubstates(MetaState metaState) throws IllegalAccessException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException {
         for (Field f : metaState.stateClass.getDeclaredFields()) {
@@ -262,7 +262,7 @@ class StateMachineCompiler {
      *
      * @param metaState
      * @param transitionClasses
-     * @return
+     * @return An array of resolved transitions.
      */
     private TransitionOnSubstate[] resolveTransitions(MetaState metaState, Class[] transitionClasses) {
         List<TransitionOnSubstate> allTransitions = new ArrayList<TransitionOnSubstate>();
@@ -284,9 +284,9 @@ class StateMachineCompiler {
      * to the given state class. Create a transition for them and add it to the
      * list of transitions.
      *
-     * @param transitionsForClass
-     * @param metaState
-     * @param c
+     * @param transitionsForClass The transitions.
+     * @param metaState The metastate.
+     * @param c The class described by the metastate.
      */
     private void resolveSubstateTransitions(List<TransitionOnSubstate> transitionsForClass, MetaState metaState, Class c) {
         for (SubstateInfo substateInfo : metaState.substates) {

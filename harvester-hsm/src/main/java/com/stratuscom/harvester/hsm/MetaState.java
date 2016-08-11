@@ -83,7 +83,7 @@ public class MetaState {
     
     /**
      * Return a string representation of the possible state structure.  Mainly for unit-testing.
-     * @return 
+     * @return A srting representation of the possible state structure.
      */
     public String getStateStructure() {
         StringBuilder sb=new StringBuilder();

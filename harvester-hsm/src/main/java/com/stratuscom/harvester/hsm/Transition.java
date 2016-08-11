@@ -36,7 +36,8 @@ public @interface Transition {
      * An array of state classes that reflect the target states for this
      * state variable.
      *
-     * @return
+     * @return An array of state classes that reflect the target states for this
+     * state variable.
      */
     Class[] value();
 }

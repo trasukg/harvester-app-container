@@ -29,8 +29,8 @@ class TransitionOnSubstate {
      * Create an instance specifying the target metastate for the given
      * substate.
      * 
-     * @param substate
-     * @param targetMetaState 
+     * @param substate The substate the transition applies to.
+     * @param targetMetaState Th target state of the transition.
      */
     public TransitionOnSubstate(SubstateInfo substate, MetaState targetMetaState) {
         this.substate = substate;

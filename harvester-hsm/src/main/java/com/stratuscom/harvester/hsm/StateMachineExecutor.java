@@ -28,8 +28,6 @@ public interface StateMachineExecutor {
     /**
      * Queue a transition to a new state, which will be executed after the 
      * current action.
-     * @param parentState
-     * @param newState 
      */
     void queueTransition(TransitionOnSubstate t);
 

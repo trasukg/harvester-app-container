@@ -50,6 +50,7 @@ public class ReturnTypeTest {
     /**
      * Expectation is that if a method is declared to return 'void', then the
      * 'Method.getReturnType()' value should be null;
+     * @throws java.lang.Exception In case of exception.
      */
     @Test
     public void testVoidReturnType() throws Exception {

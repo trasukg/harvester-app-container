@@ -26,8 +26,7 @@ interface Operation {
 
     /**
      Run the operation against a set of arguments.
-     @param args
-     @return
+     @param args The set of arguments.
      */
     void eval(StateMachineExecutor exec, Object[] args);
 

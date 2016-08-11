@@ -37,7 +37,7 @@ public @interface State {
     /**
      An array of state classes that reflect the allowable states for this
      state variable.
-     @return
+     @return An array of allowable states.
      */
     Class[] value();
 }

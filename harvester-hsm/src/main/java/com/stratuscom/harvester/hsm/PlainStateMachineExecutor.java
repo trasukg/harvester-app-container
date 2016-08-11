@@ -40,8 +40,8 @@ public class PlainStateMachineExecutor implements StateMachineExecutor, StateMac
     /**
      * Convenience method to compile a state machine and instantiate it.
      *
-     * @param rootStateClass
-     * @return
+     * @param rootStateClass The class that contains the root state of the machine.
+     * @return the compiled and instantiated state machine.
      */
     public static Object createProxy(Class rootStateClass) {
         StateMachineCompiler compiler = new StateMachineCompiler();
@@ -59,8 +59,8 @@ public class PlainStateMachineExecutor implements StateMachineExecutor, StateMac
     /**
      * Convenience method to compile a state machine and instantiate it.
      *
-     * @param rootStateClass
-     * @return
+     * @param rootStateInstance The class that contains the root state of the machine.
+     * @return The compiled and instantiated state machine.
      */
     public static Object createProxy(Object rootStateInstance) {
         StateMachineCompiler compiler = new StateMachineCompiler();
@@ -79,7 +79,7 @@ public class PlainStateMachineExecutor implements StateMachineExecutor, StateMac
     /**
      * Create a fully-instantiated metastate from a compiled metastate.
      *
-     * @param rootState
+     * @param rootState The class that contains the root state of the machine.
      */
     public static void instantiate(MetaState rootState) {
         /* Create a user class instance to go with every metastate. */
@@ -230,7 +230,7 @@ public class PlainStateMachineExecutor implements StateMachineExecutor, StateMac
     /**
      * Handle return types for primitive values.
      * @param returnType
-     * @return 
+     * @return The state representing the normalized return type.
      */
     private Class normalizeReturnType(Class returnType) {
         if (returnType==int.class) {

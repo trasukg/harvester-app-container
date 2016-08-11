@@ -37,7 +37,7 @@ public @interface Guard {
      * An array of state classes that reflect the target states for this
      * state variable.
      *
-     * @return
+     * @return The array of state classes for the current state.
      */
     Class[] value();
 }

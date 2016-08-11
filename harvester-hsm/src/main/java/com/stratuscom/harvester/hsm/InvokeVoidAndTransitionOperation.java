@@ -37,8 +37,8 @@ class InvokeVoidAndTransitionOperation implements Operation {
     /**
      * Create an instance that executes an event method that returns a value, but
      * does not include any transitions.
-     * @param targetMetaState
-     * @param targetMethod 
+     * @param targetMetaState The target metastate.
+     * @param targetMethod The method.
      */
     public InvokeVoidAndTransitionOperation(MetaState targetMetaState, Method targetMethod) {
         this(targetMetaState, targetMethod, new TransitionOnSubstate[0]);

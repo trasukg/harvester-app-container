@@ -34,7 +34,7 @@ import java.lang.annotation.Target;
 public @interface RootState {
     /**
      The event interfaces that this machine is intended to implement.
-     @return
+     @return an array of the event interfaces.
      */
     Class[] value();
 }

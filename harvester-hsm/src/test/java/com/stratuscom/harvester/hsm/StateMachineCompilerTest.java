@@ -75,7 +75,7 @@ public class StateMachineCompilerTest {
      * MetaState for TestSM should have event methods for sayHello and
      * nullTransition, but nothing else.
      *
-     * @throws Exception
+     * @throws Exception for a problem.
      */
     @Test
     public void testEventMethods() throws Exception {
@@ -89,8 +89,8 @@ public class StateMachineCompilerTest {
     /**
      * A method annotated with
      *
-     * @Guard should be reflected by a guarded transition operation.
-     * @throws Exception
+     * '@Guard' should be reflected by a guarded transition operation.
+     * @throws Exception for a problem.
      */
     @Test
     public void testGuardMethod() throws Exception {
@@ -106,8 +106,8 @@ public class StateMachineCompilerTest {
     /**
      * A method annotated with
      *
-     * @Entry should be reflected by an invoke operation in the metastate.
-     * @throws Exception
+     * '@Entry' should be reflected by an invoke operation in the metastate.
+     * @throws Exception just because.
      */
     @Test
     public void testEntryMethod() throws Exception {
@@ -119,8 +119,8 @@ public class StateMachineCompilerTest {
     /**
      * A method annotated with
      *
-     * @Entry should be reflected by an invoke operation in the metastate.
-     * @throws Exception
+     * '@Entry' should be reflected by an invoke operation in the metastate.
+     * @throws Exception just because.
      */
     @Test
     public void testExitMethod() throws Exception {
